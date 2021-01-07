@@ -74,10 +74,11 @@ return [
     ],
     'db'                 => [
         'class'    => Database::class,
-        'dsn'      => 'mysql:dbname=sky-shop;host=127.0.0.1',
-        'username' => '	sky-shop',
-        'password' => 'AzbEP5Z3DBmpdF52',
-        'charset'  => 'utf8',
+//        'dsn'      => 'mysql:dbname=sky-shop;host=127.0.0.1',
+        'dsn'      => env('DB_CONNECTION','mysql') . ':dbname=' . env('DB_DATABASE','') . ';host=' . env('DB_HOST','127.0.0.1'),
+        'username' => env('DB_USERNAME',''),
+        'password' => env('DB_PASSWORD',''),
+        'charset'  => env('DB_CHARSET','utf8'),
     ],
     'db2'                => [
         'class'    => Database::class,
@@ -107,9 +108,9 @@ return [
     ],
     'redis'              => [
         'class'    => RedisDb::class,
-        'host'     => '127.0.0.1',
-        'port'     => 6379,
-        'password' => 'goshop6666',
+        'host'     => env('REDIS_HOST','127.0.0.1'),
+        'port'     => env('REDIS_PORT',6379),
+        'password' => env('REDIS_PASSWORD',''),
         'database' => 0,
         'option'   => [
             'prefix' => 'swoft:',
