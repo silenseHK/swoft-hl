@@ -35,9 +35,7 @@ class PingModule
     public function onHandshake(Request $request, Response $response): array
     {
         $query_string = $request->getUriQuery();
-        var_dump($query_string);
         $data = decrypt($query_string);
-        var_dump($data);
         if(!$data){
             $response->withContent('参数缺失');
             return [false, $response];
