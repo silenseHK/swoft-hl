@@ -15,7 +15,7 @@ function user_func(): string
 
 function aesKey()
 {
-    return 'goshop6-666';
+    return env('AES_KEY','salt');
 }
 
 function response()
