@@ -48,11 +48,13 @@ class PingModule
         $fd = $request->getFd();
         try{
             ##将user_id加入在线集合中
-            Redis::sadd("ONLINE_USER_ID", (string)$user_id);
-            ##将user_id和fd绑定
-            Redis::hset("USER_ID_BIND_FD", (string)$user_id, (string)$fd);
-            ##将fd和user_id绑定
-            Redis::hset("FD_BIND_USER_ID", (string)$fd, (string)$user_id);
+            $res = Redis::sadd("ONLINE_USER_ID", (string)$user_id);
+            if($res){
+                ##将user_id和fd绑定
+                Redis::hset("USER_ID_BIND_FD", (string)$user_id, (string)$fd);
+                ##将fd和user_id绑定
+                Redis::hset("FD_BIND_USER_ID", (string)$fd, (string)$user_id);
+            }
         }catch(\Exception $e){
             $response->withContent($e->getMessage());
             return [false, $response];
